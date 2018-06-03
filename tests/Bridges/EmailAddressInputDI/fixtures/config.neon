@@ -1,0 +1,5 @@
+extensions:
+    - Nepada\Bridges\EmailAddressInputDI\EmailAddressInputExtension
+
+di:
+    debugger: false

@@ -1,0 +1,83 @@
+<?php
+declare(strict_types = 1);
+
+namespace Nepada\EmailAddressInput;
+
+use Nepada\EmailAddress\EmailAddress;
+use Nepada\EmailAddress\InvalidEmailAddressException;
+use Nette\Forms\Controls\TextInput;
+use Nette\Forms\Form;
+use Nette\Forms\Rule;
+use Nette\Forms\Validator;
+use Nette\Utils\Html;
+
+class EmailAddressInput extends TextInput
+{
+
+    /**
+     * @param string|Html|null $label
+     * @param int|null $maxLength
+     */
+    public function __construct($label = null, ?int $maxLength = null)
+    {
+        parent::__construct($label, $maxLength);
+        $this->setNullable();
+        $this->setRequired(false);
+        $this->addRule(Form::EMAIL);
+    }
+
+    public function getValue(): ?EmailAddress
+    {
+        $value = parent::getValue();
+        return $value;
+    }
+
+    /**
+     * @param EmailAddress|null|string $value
+     * @return static
+     */
+    public function setValue($value): self
+    {
+        if (is_string($value)) {
+            $value = new EmailAddress($value);
+        } elseif ($value !== null && !$value instanceof EmailAddress) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Value must be null, EmailAddress instance, or string with a valid email address, %s given in field "%s".',
+                    gettype($value),
+                    $this->name
+                )
+            );
+        }
+
+        parent::setValue($value);
+        return $this;
+    }
+
+    /**
+     * @param EmailAddress|null|string $value
+     * @return static
+     */
+    public function setDefaultValue($value): self
+    {
+        parent::setDefaultValue($value);
+        return $this;
+    }
+
+    public function loadHttpData(): void
+    {
+        $value = $this->getHttpData(Form::DATA_LINE);
+        try {
+            $this->setValue($value);
+        } catch (InvalidEmailAddressException $exception) {
+            $this->setValue(null);
+            $this->rawValue = $value;
+
+            $rule = new Rule();
+            $rule->control = $this;
+            $rule->validator = Form::EMAIL;
+            $this->addError(Validator::formatMessage($rule, true), false);
+        }
+    }
+
+}
