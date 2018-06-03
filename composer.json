@@ -1,0 +1,46 @@
+{
+    "name": "nepada/email-address-input",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "description": "Email address form input for Nette forms.",
+    "keywords": ["email address", "input", "form", "nette"],
+    "support": {
+        "email": "petr@pada.cz",
+        "issues": "https://github.com/nepada/email-address-input/issues"
+    },
+    "authors": [
+        {
+            "name": "Petr Morávek",
+            "email": "petr@pada.cz"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "nepada/email-address": "^1.0.0",
+        "nette/utils": "^2.4@dev || ^3.0@dev",
+        "nette/forms": "^2.4.6@dev"
+    },
+    "require-dev": {
+        "nette/tester": "^2.0",
+
+        "nette/bootstrap": "^2.4@dev || ^3.0@dev",
+        "nette/di": "^2.4.6@dev || ^3.0@dev",
+        "nette/http": "^2.4.7@dev || ^3.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nepada\\Bridges\\": "src/Bridges/",
+            "Nepada\\EmailAddressInput\\": "src/EmailAddressInput/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
