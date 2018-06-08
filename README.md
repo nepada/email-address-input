@@ -71,7 +71,7 @@ class Form extends Nette\Forms\Form
 Usage
 -----
 
-`EmailAddressInput` is form control that uses [email address value object](https://github.com/nepada/email-address) to represent its value.
+`EmailAddressInput` is form control that uses email address value object to represent its value (see [nepada/email-address](https://github.com/nepada/email-address) for further details).
 It automatically validates the user input and `getValue()` method always returns `EmailAddress` instance, or `null` if the input is not filled.
 
 ```php
