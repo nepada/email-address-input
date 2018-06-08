@@ -55,21 +55,55 @@ class EmailAddressInputTest extends Tester\TestCase
         );
     }
 
-    public function testValidDataSubmitted(): void
+    public function testNoDataSubmitted(): void
     {
-        $emailAddress = 'example@example.com';
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_FILES = [];
-        $_POST = ['email' => $emailAddress];
+        $_POST = ['email' => ''];
+
+        $form = new Form();
+        $form['email'] = new EmailAddressInput();
+        Assert::null($form['email']->getValue());
+        Assert::same(null, $form['email']->getError());
+        Assert::same(
+            '<input type="email" name="email" id="frm-email" '
+            . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\'>',
+            (string) $form['email']->getControl()
+        );
+    }
+
+    public function testEmptyValueSubmitted(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_FILES = [];
+        $_POST = ['email' => '@'];
+
+        $form = new Form();
+        $form['email'] = new EmailAddressInput();
+        $form['email']->setEmptyValue('@');
+        Assert::null($form['email']->getValue());
+        Assert::same(null, $form['email']->getError());
+        Assert::same(
+            '<input type="email" name="email" id="frm-email" '
+            . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' data-nette-empty-value="&#64;" value="&#64;">',
+            (string) $form['email']->getControl()
+        );
+    }
+
+    public function testValidDataSubmitted(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_FILES = [];
+        $_POST = ['email' => 'Example@Example.com'];
 
         $form = new Form();
         $form['email'] = new EmailAddressInput();
         Assert::type(EmailAddress::class, $form['email']->getValue());
-        Assert::same($emailAddress, (string) $form['email']->getValue());
+        Assert::same('Example@Example.com', (string) $form['email']->getValue());
         Assert::same(null, $form['email']->getError());
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
-            . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' value="example&#64;example.com">',
+            . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' value="Example&#64;Example.com">',
             (string) $form['email']->getControl()
         );
     }

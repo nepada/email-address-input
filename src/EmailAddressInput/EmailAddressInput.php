@@ -10,6 +10,7 @@ use Nette\Forms\Form;
 use Nette\Forms\Rule;
 use Nette\Forms\Validator;
 use Nette\Utils\Html;
+use Nette\Utils\Strings;
 
 class EmailAddressInput extends TextInput
 {
@@ -67,6 +68,13 @@ class EmailAddressInput extends TextInput
     public function loadHttpData(): void
     {
         $value = $this->getHttpData(Form::DATA_LINE);
+
+        if ($value === '' || $value === Strings::trim($this->translate($this->emptyValue))) {
+            $this->setValue(null);
+            $this->rawValue = $value;
+            return;
+        }
+
         try {
             $this->setValue($value);
         } catch (InvalidEmailAddressException $exception) {
