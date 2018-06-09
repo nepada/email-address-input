@@ -55,6 +55,17 @@ class EmailAddressInputTest extends Tester\TestCase
         );
     }
 
+    public function testSetInvalidValue(): void
+    {
+        $input = new EmailAddressInput();
+        Assert::exception(
+            function () use ($input): void {
+                $input->setValue(42);
+            },
+            \InvalidArgumentException::class
+        );
+    }
+
     public function testNoDataSubmitted(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';

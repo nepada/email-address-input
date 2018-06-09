@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace NepadaTests\Bridges\FormRendererDI;
+namespace NepadaTests\Bridges\EmailAddressInputDI;
 
 use Nepada\EmailAddressInput\EmailAddressInput;
 use Nette;
@@ -27,7 +27,10 @@ class EmailAddressInputExtensionTest extends Tester\TestCase
         $configurator->createContainer();
 
         $form = new Form();
-        Assert::type(EmailAddressInput::class, $form->addEmailAddress('test'));
+        $input = $form->addEmailAddress('test', 'Label');
+        Assert::type(EmailAddressInput::class, $input);
+        Assert::same('Label', $input->caption);
+        Assert::same($input, $form['test']);
     }
 
 }
