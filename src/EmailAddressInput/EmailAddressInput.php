@@ -7,8 +7,6 @@ use Nepada\EmailAddress\EmailAddress;
 use Nepada\EmailAddress\InvalidEmailAddressException;
 use Nette\Forms\Controls\TextInput;
 use Nette\Forms\Form;
-use Nette\Forms\Rule;
-use Nette\Forms\Validator;
 use Nette\Utils\Html;
 use Nette\Utils\Strings;
 
@@ -80,12 +78,12 @@ class EmailAddressInput extends TextInput
         } catch (InvalidEmailAddressException $exception) {
             $this->setValue(null);
             $this->rawValue = $value;
-
-            $rule = new Rule();
-            $rule->control = $this;
-            $rule->validator = Form::EMAIL;
-            $this->addError(Validator::formatMessage($rule, true), false);
         }
+    }
+
+    public function isFilled(): bool
+    {
+        return $this->rawValue !== '' && $this->rawValue !== Strings::trim($this->translate($this->emptyValue));
     }
 
 }

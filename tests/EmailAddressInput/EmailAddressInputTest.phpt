@@ -63,6 +63,8 @@ class EmailAddressInputTest extends Tester\TestCase
 
         $form = new Form();
         $form['email'] = new EmailAddressInput();
+        $form->fireEvents();
+
         Assert::null($form['email']->getValue());
         Assert::same(null, $form['email']->getError());
         Assert::same(
@@ -81,6 +83,8 @@ class EmailAddressInputTest extends Tester\TestCase
         $form = new Form();
         $form['email'] = new EmailAddressInput();
         $form['email']->setEmptyValue('@');
+        $form->fireEvents();
+
         Assert::null($form['email']->getValue());
         Assert::same(null, $form['email']->getError());
         Assert::same(
@@ -98,6 +102,8 @@ class EmailAddressInputTest extends Tester\TestCase
 
         $form = new Form();
         $form['email'] = new EmailAddressInput();
+        $form->fireEvents();
+
         Assert::type(EmailAddress::class, $form['email']->getValue());
         Assert::same('Example@Example.com', (string) $form['email']->getValue());
         Assert::same(null, $form['email']->getError());
@@ -116,11 +122,14 @@ class EmailAddressInputTest extends Tester\TestCase
 
         $form = new Form();
         $form['email'] = new EmailAddressInput();
+        $form['email']->setRequired('true');
+        $form->fireEvents();
+
         Assert::null($form['email']->getValue());
         Assert::same('Please enter a valid email address.', $form['email']->getError());
         Assert::same(
-            '<input type="email" name="email" id="frm-email" '
-            . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' value="foo">',
+            '<input type="email" name="email" id="frm-email" required '
+            . 'data-nette-rules=\'[{"op":":filled","msg":"true"},{"op":":email","msg":"Please enter a valid email address."}]\' value="foo">',
             (string) $form['email']->getControl()
         );
     }
