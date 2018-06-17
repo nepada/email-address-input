@@ -32,6 +32,7 @@ class EmailAddressInput extends TextInput
     }
 
     /**
+     * @internal
      * @param EmailAddress|null|string $value
      * @return static
      */
