@@ -35,6 +35,7 @@ class EmailAddressInput extends TextInput
      * @internal
      * @param EmailAddress|null|string $value
      * @return static
+     * @throws InvalidEmailAddressException
      */
     public function setValue($value): self
     {
@@ -57,6 +58,7 @@ class EmailAddressInput extends TextInput
     /**
      * @param EmailAddress|null|string $value
      * @return static
+     * @throws InvalidEmailAddressException
      */
     public function setDefaultValue($value): self
     {

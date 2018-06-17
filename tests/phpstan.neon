@@ -5,6 +5,14 @@ includes:
     - phar://phpstan.phar/vendor/pepakriz/phpstan-exception-rules/extension.neon
 
 parameters:
+    exceptionRules:
+        checkedExceptions:
+            - RuntimeException
+            - Nepada\EmailAddress\InvalidEmailAddressException
+        ignoredExceptions:
+            - LogicException
+            - Nette\InvalidStateException
+
     excludes_analyse:
         - %currentWorkingDirectory%/tests/bootstrap.php
         - %currentWorkingDirectory%/tests/temp/*
