@@ -16,3 +16,6 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/tests/bootstrap.php
         - %currentWorkingDirectory%/tests/temp/*
+
+    ignoreErrors:
+        - '#Unused @throws Nepada\\EmailAddress\\InvalidEmailAddressException annotation#' # false positive

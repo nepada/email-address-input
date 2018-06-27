@@ -33,7 +33,7 @@ class EmailAddressInput extends TextInput
 
     /**
      * @internal
-     * @param EmailAddress|null|string $value
+     * @param mixed $value
      * @return static
      * @throws InvalidEmailAddressException
      */
@@ -71,7 +71,7 @@ class EmailAddressInput extends TextInput
         $value = $this->getHttpData(Form::DATA_LINE);
 
         if ($value === '' || $value === Strings::trim($this->translate($this->emptyValue))) {
-            $this->setValue(null);
+            $this->value = null;
             $this->rawValue = $value;
             return;
         }
@@ -79,7 +79,7 @@ class EmailAddressInput extends TextInput
         try {
             $this->setValue($value);
         } catch (InvalidEmailAddressException $exception) {
-            $this->setValue(null);
+            $this->value = null;
             $this->rawValue = $value;
         }
     }
