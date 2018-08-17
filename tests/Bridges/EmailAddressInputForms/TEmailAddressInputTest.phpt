@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace NepadaTests\Bridges\EmailAddressInputForms;
 
 use Nepada\EmailAddressInput\EmailAddressInput;
-use Tester;
+use NepadaTests\TestCase;
 use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 /**
  * @testCase
  */
-class TEmailAddressInputTest extends Tester\TestCase
+class TEmailAddressInputTest extends TestCase
 {
 
     public function testAddEmailAddress(): void

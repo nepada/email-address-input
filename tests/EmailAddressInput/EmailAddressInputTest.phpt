@@ -6,8 +6,8 @@ namespace NepadaTests\EmailAddressInput;
 use Nepada\EmailAddress\EmailAddress;
 use Nepada\EmailAddress\InvalidEmailAddressException;
 use Nepada\EmailAddressInput\EmailAddressInput;
+use NepadaTests\TestCase;
 use Nette\Forms\Form;
-use Tester;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -16,7 +16,7 @@ require_once __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class EmailAddressInputTest extends Tester\TestCase
+class EmailAddressInputTest extends TestCase
 {
 
     public function testSetNullValue(): void
