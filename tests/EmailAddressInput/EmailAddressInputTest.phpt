@@ -73,15 +73,16 @@ class EmailAddressInputTest extends TestCase
         $_POST = ['email' => ''];
 
         $form = new Form();
-        $form['email'] = new EmailAddressInput();
+        $emailAddressInput = new EmailAddressInput();
+        $form['email'] = $emailAddressInput;
         $form->fireEvents();
 
-        Assert::null($form['email']->getValue());
-        Assert::same(null, $form['email']->getError());
+        Assert::null($emailAddressInput->getValue());
+        Assert::same(null, $emailAddressInput->getError());
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\'>',
-            (string) $form['email']->getControl()
+            (string) $emailAddressInput->getControl()
         );
     }
 
@@ -92,16 +93,17 @@ class EmailAddressInputTest extends TestCase
         $_POST = ['email' => '@'];
 
         $form = new Form();
-        $form['email'] = new EmailAddressInput();
-        $form['email']->setEmptyValue('@');
+        $emailAddressInput = new EmailAddressInput();
+        $form['email'] = $emailAddressInput;
+        $emailAddressInput->setEmptyValue('@');
         $form->fireEvents();
 
-        Assert::null($form['email']->getValue());
-        Assert::same(null, $form['email']->getError());
+        Assert::null($emailAddressInput->getValue());
+        Assert::same(null, $emailAddressInput->getError());
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' data-nette-empty-value="&#64;" value="&#64;">',
-            (string) $form['email']->getControl()
+            (string) $emailAddressInput->getControl()
         );
     }
 
@@ -112,16 +114,17 @@ class EmailAddressInputTest extends TestCase
         $_POST = ['email' => 'Example@Example.com'];
 
         $form = new Form();
-        $form['email'] = new EmailAddressInput();
+        $emailAddressInput = new EmailAddressInput();
+        $form['email'] = $emailAddressInput;
         $form->fireEvents();
 
-        Assert::type(EmailAddress::class, $form['email']->getValue());
-        Assert::same('Example@Example.com', (string) $form['email']->getValue());
-        Assert::same(null, $form['email']->getError());
+        Assert::type(EmailAddress::class, $emailAddressInput->getValue());
+        Assert::same('Example@Example.com', (string) $emailAddressInput->getValue());
+        Assert::same(null, $emailAddressInput->getError());
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'[{"op":"optional"},{"op":":email","msg":"Please enter a valid email address."}]\' value="Example&#64;Example.com">',
-            (string) $form['email']->getControl()
+            (string) $emailAddressInput->getControl()
         );
     }
 
@@ -132,16 +135,17 @@ class EmailAddressInputTest extends TestCase
         $_POST = ['email' => 'foo'];
 
         $form = new Form();
-        $form['email'] = new EmailAddressInput();
-        $form['email']->setRequired('true');
+        $emailAddressInput = new EmailAddressInput();
+        $form['email'] = $emailAddressInput;
+        $emailAddressInput->setRequired('true');
         $form->fireEvents();
 
-        Assert::null($form['email']->getValue());
-        Assert::same('Please enter a valid email address.', $form['email']->getError());
+        Assert::null($emailAddressInput->getValue());
+        Assert::same('Please enter a valid email address.', $emailAddressInput->getError());
         Assert::same(
             '<input type="email" name="email" id="frm-email" required '
             . 'data-nette-rules=\'[{"op":":filled","msg":"true"},{"op":":email","msg":"Please enter a valid email address."}]\' value="foo">',
-            (string) $form['email']->getControl()
+            (string) $emailAddressInput->getControl()
         );
     }
 
