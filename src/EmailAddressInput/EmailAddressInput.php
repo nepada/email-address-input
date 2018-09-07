@@ -56,7 +56,7 @@ class EmailAddressInput extends TextInput
     }
 
     /**
-     * @param EmailAddress|null|string $value
+     * @param EmailAddress|string|null $value
      * @return static
      * @throws InvalidEmailAddressException
      */
