@@ -8,10 +8,7 @@ parameters:
     exceptionRules:
         checkedExceptions:
             - RuntimeException
-            - Nepada\EmailAddress\InvalidEmailAddressException
         ignoredExceptions:
             - LogicException
             - Nette\InvalidStateException
 
-    ignoreErrors:
-        - '#Unused @throws Nepada\\EmailAddress\\InvalidEmailAddressException annotation#' # false positive
