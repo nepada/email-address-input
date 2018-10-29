@@ -28,7 +28,7 @@ class EmailAddressInputTest extends TestCase
 
     public function testSetEmailAddressValue(): void
     {
-        $emailAddress = new EmailAddress('example@example.com');
+        $emailAddress = EmailAddress::fromString('example@example.com');
         $input = new EmailAddressInput();
         $input->setValue($emailAddress);
         Assert::type(EmailAddress::class, $input->getValue());

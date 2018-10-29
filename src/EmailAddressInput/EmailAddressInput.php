@@ -39,7 +39,7 @@ class EmailAddressInput extends TextInput
     public function setValue($value): self
     {
         if (is_string($value)) {
-            $value = new EmailAddress($value);
+            $value = EmailAddress::fromString($value);
         } elseif ($value !== null && !$value instanceof EmailAddress) {
             throw new \InvalidArgumentException(
                 sprintf(

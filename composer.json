@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "nepada/email-address": "^1.0.0",
+        "nepada/email-address": "^2.0.0",
         "nette/utils": "^2.4@dev || ^3.0@dev",
         "nette/forms": "^2.4.6@dev"
     },
