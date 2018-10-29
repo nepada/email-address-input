@@ -76,7 +76,16 @@ It automatically validates the user input and `getValue()` method always returns
 
 ```php
 $emailAddressInput = $form->addEmailAddress('E-mail');
-$emailAddressInput->setValue('42'); // InvalidEmailAddressException is thrown
-$emailAddressInput->setValue('example@example.com'); // the value is internally converted to EmailAddress value object
-$emailAddressInput->getValue(); // EmailAddress instance for example@example.com 
+
+// set value using EmailAddress value object
+$emailAddressInput->setValue(EmailAddress::fromString('example@example.com'));
+
+// set value using string with a valid email address (it is internally converted to EmailAddress value object)
+$emailAddressInput->setValue('example@example.com');
+
+// Get EmailAddress instance for example@example.com
+$emailAddressInput->getValue();
+
+// InvalidEmailAddressException is thrown
+$emailAddressInput->setValue('42');
 ```
