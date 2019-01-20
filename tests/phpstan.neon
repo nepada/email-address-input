@@ -6,9 +6,12 @@ includes:
 
 parameters:
     exceptionRules:
-        checkedExceptions:
-            - RuntimeException
-        ignoredExceptions:
+        uncheckedExceptions:
             - LogicException
             - Nette\InvalidStateException
 
+
+    ignoreErrors:
+        -
+            message: '#Parameter \#1 \$value \(Nepada\\EmailAddress\\EmailAddress\|string\|null\) of method Nepada\\EmailAddressInput\\EmailAddressInput::setDefaultValue\(\) should be contravariant with parameter#' # intended
+            path: %currentWorkingDirectory%/src/EmailAddressInput/EmailAddressInput.php
