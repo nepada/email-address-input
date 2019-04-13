@@ -23,3 +23,6 @@ parameters:
         -
             message: '#Call to an undefined method Nette\\Forms\\Form::addEmailAddress\(\)#' # false positive
             path: %currentWorkingDirectory%/tests/Bridges/EmailAddressInputDI/EmailAddressInputExtensionTest.phpt
+        -
+            message: "#Call to function method_exists\\(\\) with 'Nette\\\\\\\\Forms\\\\\\\\Rules' and '.*' will always evaluate to (false|true)\\.#"
+            path: %currentWorkingDirectory%/tests/EmailAddressInput/EmailAddressInputTest.phpt

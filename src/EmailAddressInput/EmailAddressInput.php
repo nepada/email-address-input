@@ -21,7 +21,7 @@ class EmailAddressInput extends TextInput
     {
         parent::__construct($label, $maxLength);
         $this->setNullable();
-        $this->setRequired(false);
+        $this->setRequired(false); // BC with Nette 2.4
         $this->addRule(Form::EMAIL);
     }
 
