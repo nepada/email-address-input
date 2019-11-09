@@ -4,15 +4,16 @@ declare(strict_types = 1);
 namespace Nepada\Bridges\EmailAddressInputDI;
 
 use Nepada\Bridges\EmailAddressInputForms\ExtensionMethodRegistrator;
+use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 
 class EmailAddressInputExtension extends CompilerExtension
 {
 
-    public function loadConfiguration(): void
+    public function getConfigSchema(): Nette\Schema\Schema
     {
-        $this->validateConfig([]);
+        return Nette\Schema\Expect::structure([]);
     }
 
     public function afterCompile(ClassType $class): void
