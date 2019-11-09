@@ -8,7 +8,6 @@ use Nepada\EmailAddress\InvalidEmailAddressException;
 use Nepada\EmailAddressInput\EmailAddressInput;
 use NepadaTests\TestCase;
 use Nette\Forms\Form;
-use Nette\Forms\Rules;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -19,15 +18,6 @@ require_once __DIR__ . '/../bootstrap.php';
  */
 class EmailAddressInputTest extends TestCase
 {
-
-    /** @var bool */
-    private $isNette24 = false;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->isNette24 = method_exists(Rules::class, 'isOptional') && method_exists(Rules::class, 'check'); // BC with Nette 2.4
-    }
 
     public function testSetNullValue(): void
     {
@@ -92,7 +82,6 @@ class EmailAddressInputTest extends TestCase
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
-            . ($this->isNette24 ? '{"op":"optional"},' : '')
             . '{"op":":email","msg":"Please enter a valid email address."}]\'>',
             (string) $emailAddressInput->getControl()
         );
@@ -115,7 +104,6 @@ class EmailAddressInputTest extends TestCase
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
-            . ($this->isNette24 ? '{"op":"optional"},' : '')
             . '{"op":":email","msg":"Please enter a valid email address."}]\' data-nette-empty-value="&#64;" value="&#64;">',
             (string) $emailAddressInput->getControl()
         );
@@ -138,7 +126,6 @@ class EmailAddressInputTest extends TestCase
         Assert::same(
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
-            . ($this->isNette24 ? '{"op":"optional"},' : '')
             . '{"op":":email","msg":"Please enter a valid email address."}]\' value="Example&#64;Example.com">',
             (string) $emailAddressInput->getControl()
         );
