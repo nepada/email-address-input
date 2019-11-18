@@ -39,7 +39,7 @@ class EmailAddressInput extends TextInput
     {
         if (is_string($value)) {
             $value = EmailAddress::fromString($value);
-        } elseif ($value !== null && !$value instanceof EmailAddress) {
+        } elseif ($value !== null && ! $value instanceof EmailAddress) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Value must be null, EmailAddress instance, or string with a valid email address, %s given in field "%s".',
