@@ -44,8 +44,8 @@ class EmailAddressInput extends TextInput
                 sprintf(
                     'Value must be null, EmailAddress instance, or string with a valid email address, %s given in field "%s".',
                     gettype($value),
-                    $this->name
-                )
+                    $this->name,
+                ),
             );
         }
 

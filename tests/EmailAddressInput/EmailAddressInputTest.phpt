@@ -51,7 +51,7 @@ class EmailAddressInputTest extends TestCase
             function () use ($input): void {
                 $input->setValue('foo');
             },
-            InvalidEmailAddressException::class
+            InvalidEmailAddressException::class,
         );
     }
 
@@ -62,7 +62,7 @@ class EmailAddressInputTest extends TestCase
             function () use ($input): void {
                 $input->setValue(42);
             },
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
     }
 
@@ -83,7 +83,7 @@ class EmailAddressInputTest extends TestCase
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
             . '{"op":":email","msg":"Please enter a valid email address."}]\'>',
-            (string) $emailAddressInput->getControl()
+            (string) $emailAddressInput->getControl(),
         );
     }
 
@@ -105,7 +105,7 @@ class EmailAddressInputTest extends TestCase
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
             . '{"op":":email","msg":"Please enter a valid email address."}]\' data-nette-empty-value="&#64;" value="&#64;">',
-            (string) $emailAddressInput->getControl()
+            (string) $emailAddressInput->getControl(),
         );
     }
 
@@ -127,7 +127,7 @@ class EmailAddressInputTest extends TestCase
             '<input type="email" name="email" id="frm-email" '
             . 'data-nette-rules=\'['
             . '{"op":":email","msg":"Please enter a valid email address."}]\' value="Example&#64;Example.com">',
-            (string) $emailAddressInput->getControl()
+            (string) $emailAddressInput->getControl(),
         );
     }
 
@@ -148,7 +148,7 @@ class EmailAddressInputTest extends TestCase
         Assert::same(
             '<input type="email" name="email" id="frm-email" required '
             . 'data-nette-rules=\'[{"op":":filled","msg":"true"},{"op":":email","msg":"Please enter a valid email address."}]\' value="foo">',
-            (string) $emailAddressInput->getControl()
+            (string) $emailAddressInput->getControl(),
         );
     }
 
