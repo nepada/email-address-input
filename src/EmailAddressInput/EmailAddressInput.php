@@ -14,7 +14,7 @@ class EmailAddressInput extends TextInput
 {
 
     /**
-     * @param string|Html|null $label
+     * @param string|Html<mixed>|null $label
      * @param int|null $maxLength
      */
     public function __construct($label = null, ?int $maxLength = null)

@@ -1,13 +1,13 @@
 includes:
-    - phar://phpstan.phar/vendor/pepakriz/phpstan-exception-rules/extension.neon
-    - phar://phpstan.phar/vendor/phpstan/phpstan-nette/extension.neon
-    - phar://phpstan.phar/vendor/phpstan/phpstan-nette/rules.neon
-    - phar://phpstan.phar/vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/pepakriz/phpstan-exception-rules/extension.neon
+    - vendor/phpstan/phpstan-nette/extension.neon
+    - vendor/phpstan/phpstan-nette/rules.neon
 
 parameters:
     level: max
     paths:
-        - %currentWorkingDirectory%/src
+        - src
 
     exceptionRules:
         uncheckedExceptions:
@@ -16,6 +16,6 @@ parameters:
 
 
     ignoreErrors:
-        -
-            message: '#Parameter \#1 \$value \(Nepada\\EmailAddress\\EmailAddress\|string\|null\) of method Nepada\\EmailAddressInput\\EmailAddressInput::setDefaultValue\(\) should be contravariant with parameter#' # intended
-            path: %currentWorkingDirectory%/src/EmailAddressInput/EmailAddressInput.php
+        - # intended
+            message: '#Parameter \#1 \$value \(Nepada\\EmailAddress\\EmailAddress\|string\|null\) of method Nepada\\EmailAddressInput\\EmailAddressInput::setDefaultValue\(\) should be contravariant with parameter#'
+            path: src/EmailAddressInput/EmailAddressInput.php
