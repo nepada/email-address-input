@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 /**
  * @testCase
  */
-class TEmailAddressInputTest extends TestCase
+class EmailAddressInputMixinTest extends TestCase
 {
 
     public function testAddEmailAddress(): void
@@ -27,4 +27,4 @@ class TEmailAddressInputTest extends TestCase
 
 }
 
-(new TEmailAddressInputTest())->run();
+(new EmailAddressInputMixinTest())->run();

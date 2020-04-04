@@ -28,7 +28,7 @@ It will register extension method `addEmailAddress($name, $label)` to `Nette\For
 
 ### Option B: use trait in your base form/container class
 
-You can also use `TEmailAddressInput` trait in your base form/container class to add method `addEmailAddress($name, $label)`.
+You can also use `EmailAddressInputMixin` trait in your base form/container class to add method `addEmailAddress($name, $label)`.
 
 Example:
 
@@ -37,7 +37,7 @@ Example:
 trait TFormControls
 {
 
-    use Nepada\Bridges\EmailAddressInputForms\TEmailAddressInput;
+    use Nepada\Bridges\EmailAddressInputForms\EmailAddressInputMixin;
 
     public function addContainer($name)
     {
