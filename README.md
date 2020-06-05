@@ -23,12 +23,12 @@ extensions:
     - Nepada\Bridges\EmailAddressInputDI\EmailAddressInputExtension
 ```
 
-It will register extension method `addEmailAddress($name, $label)` to `Nette\Forms\Container`.
+It will register extension method `addEmailAddress($name, $label, $caseSensitive = false)` to `Nette\Forms\Container`.
 
 
 ### Option B: use trait in your base form/container class
 
-You can also use `EmailAddressInputMixin` trait in your base form/container class to add method `addEmailAddress($name, $label)`.
+You can also use `EmailAddressInputMixin` trait in your base form/container class to add method `addEmailAddress($name, $label, $caseSensitive = false)`.
 
 Example:
 
@@ -78,7 +78,7 @@ It automatically validates the user input and `getValue()` method always returns
 $emailAddressInput = $form->addEmailAddress('E-mail');
 
 // set value using EmailAddress value object
-$emailAddressInput->setValue(EmailAddress::fromString('example@example.com'));
+$emailAddressInput->setValue(CaseInsensitiveEmailAddress::fromString('example@example.com'));
 
 // set value using string with a valid email address (it is internally converted to EmailAddress value object)
 $emailAddressInput->setValue('example@example.com');
@@ -89,3 +89,11 @@ $emailAddressInput->getValue();
 // InvalidEmailAddressException is thrown
 $emailAddressInput->setValue('42');
 ```
+
+### Case sensitivity
+
+By default the input returns instance of `CaseInsensitiveEmailAddress`, i.e. the value object that treats the whole email address as case insensitive.
+
+You can change this behaviour by calling `EmailAddressInput::setCaseSensitive(true)`, or by passing `$caseSensitive = true` when creating the input. With enabled case sensitivity the input's value will be represented as `RfcEmailAddress` instance.
+
+For further details see the readme of [nepada/email-address](https://github.com/nepada/email-address).

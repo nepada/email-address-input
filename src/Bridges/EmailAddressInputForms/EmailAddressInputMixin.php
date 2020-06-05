@@ -12,11 +12,12 @@ trait EmailAddressInputMixin
     /**
      * @param string|int $name
      * @param string|Html|null $label
+     * @param bool $caseSensitive
      * @return EmailAddressInput
      */
-    public function addEmailAddress($name, $label = null): EmailAddressInput
+    public function addEmailAddress($name, $label = null, bool $caseSensitive = false): EmailAddressInput
     {
-        return $this[$name] = new EmailAddressInput($label);
+        return $this[$name] = new EmailAddressInput($label, null, $caseSensitive);
     }
 
 }

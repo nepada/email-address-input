@@ -16,7 +16,11 @@ class ExtensionMethodRegistrator
     {
         Container::extensionMethod(
             'addEmailAddress',
-            fn (Container $container, $name, $label = null): EmailAddressInput => $container[$name] = new EmailAddressInput($label),
+            function (Container $container, $name, $label = null, bool $caseSensitive = false): EmailAddressInput {
+                $control = new EmailAddressInput($label, null, $caseSensitive);
+                $container[$name] = $control;
+                return $control;
+            },
         );
     }
 

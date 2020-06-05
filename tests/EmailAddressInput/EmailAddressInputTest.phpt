@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace NepadaTests\EmailAddressInput;
 
+use Nepada\EmailAddress\CaseInsensitiveEmailAddress;
 use Nepada\EmailAddress\EmailAddress;
 use Nepada\EmailAddress\InvalidEmailAddressException;
 use Nepada\EmailAddress\RfcEmailAddress;
@@ -32,7 +33,7 @@ class EmailAddressInputTest extends TestCase
         $emailAddress = RfcEmailAddress::fromString('example@example.com');
         $input = new EmailAddressInput();
         $input->setValue($emailAddress);
-        Assert::type(EmailAddress::class, $input->getValue());
+        Assert::type(CaseInsensitiveEmailAddress::class, $input->getValue());
         Assert::same((string) $emailAddress, (string) $input->getValue());
     }
 
@@ -41,7 +42,7 @@ class EmailAddressInputTest extends TestCase
         $emailAddress = 'example@example.com';
         $input = new EmailAddressInput();
         $input->setValue($emailAddress);
-        Assert::type(EmailAddress::class, $input->getValue());
+        Assert::type(CaseInsensitiveEmailAddress::class, $input->getValue());
         Assert::same($emailAddress, (string) $input->getValue());
     }
 
@@ -65,6 +66,16 @@ class EmailAddressInputTest extends TestCase
             },
             \InvalidArgumentException::class,
         );
+    }
+
+    public function testCaseSensitivityEnabled(): void
+    {
+        $emailAddress = CaseInsensitiveEmailAddress::fromString('Example@Example.com');
+        $input = new EmailAddressInput();
+        $input->setCaseSensitive(true);
+        $input->setValue($emailAddress);
+        Assert::type(RfcEmailAddress::class, $input->getValue());
+        Assert::same((string) $emailAddress, (string) $input->getValue());
     }
 
     public function testNoDataSubmitted(): void
