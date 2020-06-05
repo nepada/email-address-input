@@ -5,6 +5,7 @@ namespace Nepada\EmailAddressInput;
 
 use Nepada\EmailAddress\EmailAddress;
 use Nepada\EmailAddress\InvalidEmailAddressException;
+use Nepada\EmailAddress\RfcEmailAddress;
 use Nette\Forms\Controls\TextInput;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
@@ -38,7 +39,7 @@ class EmailAddressInput extends TextInput
     public function setValue($value): self
     {
         if (is_string($value)) {
-            $value = EmailAddress::fromString($value);
+            $value = RfcEmailAddress::fromString($value);
         } elseif ($value !== null && ! $value instanceof EmailAddress) {
             throw new \InvalidArgumentException(
                 sprintf(

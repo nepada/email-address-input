@@ -5,6 +5,7 @@ namespace NepadaTests\EmailAddressInput;
 
 use Nepada\EmailAddress\EmailAddress;
 use Nepada\EmailAddress\InvalidEmailAddressException;
+use Nepada\EmailAddress\RfcEmailAddress;
 use Nepada\EmailAddressInput\EmailAddressInput;
 use NepadaTests\TestCase;
 use Nette\Forms\Form;
@@ -28,7 +29,7 @@ class EmailAddressInputTest extends TestCase
 
     public function testSetEmailAddressValue(): void
     {
-        $emailAddress = EmailAddress::fromString('example@example.com');
+        $emailAddress = RfcEmailAddress::fromString('example@example.com');
         $input = new EmailAddressInput();
         $input->setValue($emailAddress);
         Assert::type(EmailAddress::class, $input->getValue());
