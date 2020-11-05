@@ -1,7 +1,7 @@
 Email address form input
 ========================
 
-[![Build Status](https://travis-ci.org/nepada/email-address-input.svg?branch=master)](https://travis-ci.org/nepada/email-address-input)
+[![Build Status](https://github.com/nepada/email-address-input/workflows/CI/badge.svg)](https://github.com/nepada/email-address-input/actions?query=workflow%3ACI+branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/nepada/email-address-input/badge.svg?branch=master)](https://coveralls.io/github/nepada/email-address-input?branch=master)
 [![Downloads this Month](https://img.shields.io/packagist/dm/nepada/email-address-input.svg)](https://packagist.org/packages/nepada/email-address-input)
 [![Latest stable](https://img.shields.io/packagist/v/nepada/email-address-input.svg)](https://packagist.org/packages/nepada/email-address-input)
