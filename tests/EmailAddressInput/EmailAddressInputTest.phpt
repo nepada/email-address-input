@@ -21,6 +21,12 @@ require_once __DIR__ . '/../bootstrap.php';
 class EmailAddressInputTest extends TestCase
 {
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $_COOKIE['_nss'] = '1';
+    }
+
     public function testSetNullValue(): void
     {
         $input = new EmailAddressInput();
