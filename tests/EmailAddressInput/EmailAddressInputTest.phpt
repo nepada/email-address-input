@@ -21,12 +21,6 @@ require_once __DIR__ . '/../bootstrap.php';
 class EmailAddressInputTest extends TestCase
 {
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $_COOKIE['_nss'] = '1';
-    }
-
     public function testSetNullValue(): void
     {
         $input = new EmailAddressInput();
@@ -86,11 +80,10 @@ class EmailAddressInputTest extends TestCase
 
     public function testNoDataSubmitted(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_FILES = [];
+        $this->resetHttpGlobalVariables();
         $_POST = ['email' => ''];
 
-        $form = new Form();
+        $form = $this->createForm();
         $emailAddressInput = new EmailAddressInput();
         $form['email'] = $emailAddressInput;
         $form->fireEvents();
@@ -107,11 +100,10 @@ class EmailAddressInputTest extends TestCase
 
     public function testEmptyValueSubmitted(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_FILES = [];
+        $this->resetHttpGlobalVariables();
         $_POST = ['email' => '@'];
 
-        $form = new Form();
+        $form = $this->createForm();
         $emailAddressInput = new EmailAddressInput();
         $form['email'] = $emailAddressInput;
         $emailAddressInput->setEmptyValue('@');
@@ -129,11 +121,10 @@ class EmailAddressInputTest extends TestCase
 
     public function testValidDataSubmitted(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_FILES = [];
+        $this->resetHttpGlobalVariables();
         $_POST = ['email' => 'Example@Example.com'];
 
-        $form = new Form();
+        $form = $this->createForm();
         $emailAddressInput = new EmailAddressInput();
         $form['email'] = $emailAddressInput;
         $form->fireEvents();
@@ -151,11 +142,10 @@ class EmailAddressInputTest extends TestCase
 
     public function testInvalidDataSubmitted(): void
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_FILES = [];
+        $this->resetHttpGlobalVariables();
         $_POST = ['email' => 'foo'];
 
-        $form = new Form();
+        $form = $this->createForm();
         $emailAddressInput = new EmailAddressInput();
         $form['email'] = $emailAddressInput;
         $emailAddressInput->setRequired('true');
@@ -168,6 +158,23 @@ class EmailAddressInputTest extends TestCase
             . 'data-nette-rules=\'[{"op":":filled","msg":"true"},{"op":":email","msg":"Please enter a valid email address."}]\' value="foo">',
             (string) $emailAddressInput->getControl(),
         );
+    }
+
+    private function resetHttpGlobalVariables(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_FILES = [];
+        $_COOKIE['_nss'] = '1';
+        $_POST = [];
+        $_GET = [];
+    }
+
+    private function createForm(): Form
+    {
+        $form = new Form();
+        $form->onSubmit[] = function (): void {
+        };
+        return $form;
     }
 
 }
