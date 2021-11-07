@@ -37,6 +37,7 @@ class EmailAddressInput extends TextInput
 
     public function getValue(): ?EmailAddress
     {
+        /** @var EmailAddress|null $value */
         $value = parent::getValue();
         return $value;
     }
@@ -76,6 +77,7 @@ class EmailAddressInput extends TextInput
 
     public function loadHttpData(): void
     {
+        /** @var string $value */
         $value = $this->getHttpData(Form::DATA_LINE);
 
         if ($value === '' || $value === Strings::trim($this->translate($this->emptyValue))) {

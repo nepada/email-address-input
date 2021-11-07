@@ -1,6 +1,5 @@
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
-    - vendor/pepakriz/phpstan-exception-rules/extension.neon
     - vendor/phpstan/phpstan-nette/extension.neon
     - vendor/phpstan/phpstan-nette/rules.neon
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
@@ -12,13 +11,25 @@ parameters:
     paths:
         - src
 
-    exceptionRules:
-        uncheckedExceptions:
+    exceptions:
+        implicitThrows: false
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
+        uncheckedExceptionClasses:
             - LogicException
             - Nette\InvalidStateException
-
 
     ignoreErrors:
         - # intended
             message: '#Parameter \#1 \$value \(Nepada\\EmailAddress\\EmailAddress\|string\|null\) of method Nepada\\EmailAddressInput\\EmailAddressInput::setDefaultValue\(\) should be contravariant with parameter#'
             path: src/EmailAddressInput/EmailAddressInput.php
+        -
+            message: "#^Dead catch \\- Nepada\\\\EmailAddress\\\\InvalidEmailAddressException is never thrown in the try block\\.$#"
+            count: 1
+            path: src/EmailAddressInput/EmailAddressInput.php
+        -
+            message: "#^Parameter \\#1 \\$s of static method Nette\\\\Utils\\\\Strings\\:\\:trim\\(\\) expects string, mixed given\\.$#"
+            count: 2
+            path: src/EmailAddressInput/EmailAddressInput.php
+
