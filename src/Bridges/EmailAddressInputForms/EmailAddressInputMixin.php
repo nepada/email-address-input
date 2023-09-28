@@ -9,13 +9,7 @@ use Nette\Utils\Html;
 trait EmailAddressInputMixin
 {
 
-    /**
-     * @param string|int $name
-     * @param string|Html|null $label
-     * @param bool $caseSensitive
-     * @return EmailAddressInput
-     */
-    public function addEmailAddress($name, $label = null, bool $caseSensitive = false): EmailAddressInput
+    public function addEmailAddress(string|int $name, string|Html|null $label = null, bool $caseSensitive = false): EmailAddressInput
     {
         return $this[$name] = new EmailAddressInput($label, null, $caseSensitive);
     }

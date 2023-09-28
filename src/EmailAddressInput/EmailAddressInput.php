@@ -17,12 +17,7 @@ class EmailAddressInput extends TextInput
 
     private bool $caseSensitive;
 
-    /**
-     * @param string|Html<mixed>|null $label
-     * @param int|null $maxLength
-     * @param bool $caseSensitive
-     */
-    public function __construct($label = null, ?int $maxLength = null, bool $caseSensitive = false)
+    public function __construct(string|Html|null $label = null, ?int $maxLength = null, bool $caseSensitive = false)
     {
         parent::__construct($label, $maxLength);
         $this->caseSensitive = $caseSensitive;
@@ -44,10 +39,9 @@ class EmailAddressInput extends TextInput
 
     /**
      * @internal
-     * @param mixed $value
-     * @return static
+     * @return $this
      */
-    public function setValue($value): self
+    public function setValue(mixed $value): static
     {
         if (is_string($value) || $value instanceof EmailAddress) {
             $value = $this->toEmailAddress($value);
@@ -67,9 +61,9 @@ class EmailAddressInput extends TextInput
 
     /**
      * @param EmailAddress|string|null $value
-     * @return static
+     * @return $this
      */
-    public function setDefaultValue($value): self
+    public function setDefaultValue(mixed $value): static
     {
         parent::setDefaultValue($value);
         return $this;
@@ -100,11 +94,9 @@ class EmailAddressInput extends TextInput
     }
 
     /**
-     * @param string|EmailAddress $value
-     * @return EmailAddress
      * @throws InvalidEmailAddressException
      */
-    private function toEmailAddress($value): EmailAddress
+    private function toEmailAddress(string|EmailAddress $value): EmailAddress
     {
         if ($this->caseSensitive) {
             return RfcEmailAddress::fromString((string) $value);
