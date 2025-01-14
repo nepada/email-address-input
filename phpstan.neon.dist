@@ -25,6 +25,16 @@ parameters:
             - Nette\InvalidStateException
 
     ignoreErrors:
+        - # covered by tests
+            message: '#^Trait Nepada\\Bridges\\EmailAddressInputForms\\EmailAddressInputMixin is used zero times and is not analysed\.$#'
+            identifier: trait.unused
+            count: 1
+            path: src/Bridges/EmailAddressInputForms/EmailAddressInputMixin.php
+        - # covered by tests
+            message: '#^Trait Nepada\\Bridges\\EmailAddressInputForms\\TEmailAddressInput is used zero times and is not analysed\.$#'
+            identifier: trait.unused
+            count: 1
+            path: src/Bridges/EmailAddressInputForms/TEmailAddressInput.php
         - # intended
             message: '#Parameter \#1 \$value \(Nepada\\EmailAddress\\EmailAddress\|string\|null\) of method Nepada\\EmailAddressInput\\EmailAddressInput::setDefaultValue\(\) should be contravariant with parameter#'
             path: src/EmailAddressInput/EmailAddressInput.php
