@@ -30,7 +30,7 @@ class EmailAddressInputExtensionTest extends TestCase
         $form = new Form();
         $input = $form->addEmailAddress('test', 'Label');
         Assert::type(EmailAddressInput::class, $input);
-        Assert::same('Label', $input->caption);
+        Assert::same('Label', $input->getCaption());
         Assert::same($input, $form['test']);
     }
 
