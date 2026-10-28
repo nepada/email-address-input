@@ -15,12 +15,13 @@ use Nette\Utils\Strings;
 class EmailAddressInput extends TextInput
 {
 
-    private bool $caseSensitive;
-
-    public function __construct(string|Html|null $label = null, ?int $maxLength = null, bool $caseSensitive = false)
+    public function __construct(
+        string|Html|null $label = null,
+        ?int $maxLength = null,
+        private bool $caseSensitive = false,
+    )
     {
         parent::__construct($label, $maxLength);
-        $this->caseSensitive = $caseSensitive;
         $this->setNullable();
         $this->addRule(Form::EMAIL);
     }
